@@ -1,0 +1,12 @@
+# Useful aliases for faster typing.
+alias cls=clear
+alias la="ls -a"
+alias ll="ls -al"
+
+# Make man pages word wrap at 100 characters.
+MANWIDTH=100
+export MANWIDTH
+
+# Set Vim as the program of choice for anything requiring an editor.
+export VISUAL=vim
+export EDITOR="$VISUAL"

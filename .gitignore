@@ -1,0 +1,15 @@
+/*
+
+!.shrc_extra
+!.gitconfig
+!.gitignore
+!.vimrc
+
+!.config/
+.config/*
+!.config/git/
+
+!.vim/
+.vim/*
+!.vim/after/
+!.vim/syntax/
