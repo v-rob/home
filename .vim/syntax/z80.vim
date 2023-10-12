@@ -23,20 +23,15 @@ syn keyword z80Instr sbc scf set sla sll sra srl sub
 syn keyword z80Instr pop push
 syn keyword z80Instr xor
 
-syn keyword z80Library bcall bjump
-
 syn match z80Directive /\v^\s*\zs\.[a-z0-9_.$]+\ze/
-
 syn match z80Label /\v^[a-z_][a-z0-9_.]*/
 syn match z80Label /\v^\s*\zs[a-z_][a-z0-9_.]*\ze:/
+syn match z80Macro /\v\zs[a-z][a-z0-9_.]*\ze\(/
 
-syn match z80DecNumber /\v[0-9]+/
-syn match z80BinNumber /\v0[bB][01]+/
-syn match z80BinNumber /\v\%[01]+/
-syn match z80OctNumber /\v0[oO][0-7]+/
-syn match z80OctNumber /\v\&[0-7]+/
-syn match z80HexNumber /\v0[xX][0-9a-fA-F]+/
-syn match z80HexNumber /\v\$[0-9a-fA-F]+/
+syn match z80DecNumber /\v(^|\W)\zs[0-9]+\ze(\W|$)/
+syn match z80BinNumber /\v\zs\%[01]+\ze(\W|$)/
+syn match z80OctNumber /\v\zs\@[0-7]+\ze(\W|$)/
+syn match z80HexNumber /\v\zs\$[0-9a-fA-F]+\ze(\W|$)/
 
 syn match z80String /\v\".{-}\"/
 syn match z80Char /\v\'.{-}\'/
@@ -50,9 +45,9 @@ hi def link z80Reg Include
 hi def link z80Flag Include
 
 hi def link z80Instr Type
-hi def link z80Library Special
-hi def link z80Directive Keyword
 
+hi def link z80Directive Keyword
+hi def link z80Macro Special
 hi def link z80Label Keyword
 
 hi def link z80HexNumber Number

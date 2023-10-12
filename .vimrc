@@ -61,6 +61,7 @@ hi MatchParen ctermbg=darkmagenta guibg=darkmagenta
 
 " We rarely, if ever, want x to copy to the clipboard. Leave that to d instead.
 nnoremap x "_x
+vnoremap x "_x
 
 " In normal mode, we want to highlight trailing whitespace in red. Don't do it
 " in insert mode because that can get distracting.
