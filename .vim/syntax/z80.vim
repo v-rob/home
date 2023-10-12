@@ -27,25 +27,21 @@ syn keyword z80Library bcall bjump
 
 syn match z80Directive /\v^\s*\zs\.[a-z0-9_.$]+\ze/
 
-syn match z80Label /\v^[a-z_$][a-z0-9_.$]*/
-syn match z80Label /\v^\s*\zs[a-z_$][a-z0-9_.$]*\ze:/
+syn match z80Label /\v^[a-z_][a-z0-9_.]*/
+syn match z80Label /\v^\s*\zs[a-z_][a-z0-9_.]*\ze:/
 
 syn match z80DecNumber /\v[0-9]+/
 syn match z80BinNumber /\v0[bB][01]+/
-syn match z80BinNumber /\v\$\%[01]+/
-syn match z80OctNumber /\v0[oOqQ][0-7]+/
-syn match z80OctNumber /\v\$\&[0-7]+/
-syn match z80DecNumber /\v0[dD][0-9]+/
-syn match z80DecNumber /\v\$\#[0-9]+/
-syn match z80HexNumber /\v0[xXhH][0-9a-fA-F]+/
-syn match z80HexNumber /\v\$\$[0-9a-fA-F]+/
+syn match z80BinNumber /\v\%[01]+/
+syn match z80OctNumber /\v0[oO][0-7]+/
+syn match z80OctNumber /\v\&[0-7]+/
+syn match z80HexNumber /\v0[xX][0-9a-fA-F]+/
+syn match z80HexNumber /\v\$[0-9a-fA-F]+/
 
-syn match z80ByteChar /\v\'./
-syn match z80WordChar /\v\"../
+syn match z80String /\v\".{-}\"/
+syn match z80Char /\v\'.{-}\'/
 
-syn match z80String /\v\^([^ \t\n0-9a-z_.$]).{-}\1/
-
-syn keyword z80Todo contained TODO
+syn keyword z80Todo contained todo
 syn match z80Comment /\v\;.*/ contains=z80Todo
 
 syn case match
@@ -64,9 +60,8 @@ hi def link z80OctNumber Number
 hi def link z80BinNumber Number
 hi def link z80DecNumber Number
 
-hi def link z80ByteChar String
-hi def link z80WordChar String
 hi def link z80String String
+hi def link z80Char String
 
 hi def link z80Todo Todo
 hi def link z80Comment Comment

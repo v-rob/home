@@ -3,6 +3,8 @@
 	ls = status
 	sub = reset HEAD --
 	amend = commit --amend
+	wipeout = !git reset --hard @ && git clean -fd
+	stiff = diff --staged
 [pager]
 	branch = false
 [credential "https://github.com"]
