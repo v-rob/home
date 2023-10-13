@@ -6,7 +6,6 @@ set nocompatible
 " Show line numbers and set column length limit lines.
 set number
 set colorcolumn=80,90,100
-hi ColorColumn ctermbg=darkgray guibg=lightgrey
 
 " We want four-space tabs for everything by default.
 set tabstop=4
@@ -24,10 +23,7 @@ set shortmess-=S
 set showcmd
 
 " Make Vim use the system clipboard for copy and paste.
-set clipboard=unnamedplus
-
-" Set the default shell for :terminal and :shell to zsh
-set shell=/bin/zsh
+set clipboard=unnamed
 
 " Moving in entire pages isn't very nice. Half-pages are better. So, rebind
 " page up/down for occasional convenience when browsing files.
