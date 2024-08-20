@@ -17,7 +17,7 @@ set scrolloff=5
 
 " Ignore case in searching (use \C to turn it back on)
 set ignorecase
-"
+
 " Show number of matches and the current match in a search.
 set shortmess-=S
 " Show the current command and selection information.
@@ -31,8 +31,8 @@ set shell=/bin/zsh
 
 " Moving in entire pages isn't very nice. Half-pages are better. So, rebind
 " page up/down for the occasional usage.
-nnoremap <PageUp> <C-u>
-nnoremap <PageDown> <C-d>
+noremap <PageUp> <C-u>
+noremap <PageDown> <C-d>
 
 " By default, move up and down between partial word-wrapped lines rather than
 " always up and down a full line.
@@ -46,12 +46,82 @@ vnoremap gj j
 vnoremap k gk
 vnoremap gk k
 
-" Ampersand is hard to type for replace, but your hand is already on n; hence,
-" use Ctrl-n instead.
-nnoremap <C-n> &
+" We rarely, if ever, want x to copy to the clipboard. Leave that to d and c
+" and suchlike instead.
+nnoremap x "_x
+vnoremap x "_x
 
-" Shortcut for opening a terminal vertically.
-nnoremap <C-w>t :vertical rightbelow term<CR>
+" We want to make most searches very not magic by default, and only do a very
+" magic search if explicitly requested with ?. Additionally, make # do a
+" search based on the current selection.
+nnoremap / /\V
+nnoremap g/ /\V\C
+nnoremap ? /\v\C
+nnoremap * /\V<C-r>=escape(expand('<cword>'), '/\')<Enter><Enter>
+nnoremap g* /\V\C\<<C-r>=escape(expand('<cword>'), '/\')<Enter>\><Enter>
+nnoremap # v"zy/\V<C-r>=escape(@z, '/\')<Enter><Enter>
+nnoremap g# v"zy/\V\C\<<C-r>=escape(@z, '/\')<Enter>\><Enter>
+
+vnoremap / /\V
+vnoremap g/ /\V\C
+vnoremap ? /\v\C
+vnoremap * /\V<C-r>=escape(expand('<cword>'), '/\')<Enter><Enter>
+vnoremap g* /\V\C\<<C-r>=escape(expand('<cword>'), '/\')<Enter>\><Enter>
+vnoremap # "zy/\V<C-r>=escape(@z, '/\')<Enter><Enter>
+vnoremap g# "zy/\V\C\<<C-r>=escape(@z, '/\')<Enter>\><Enter>
+
+" For global substitution, emulate the functionality of the search commands
+" with prefix of Ctrl-m.
+noremap <C-m> <nop>
+command M call feedkeys('``')
+
+nnoremap <C-m>/ m`:%s/\V/g<Bar>M<Left><Left><Left><Left>
+nnoremap g<C-m>/ m`:%s/\V\C/g<Bar>M<Left><Left><Left><Left>
+nnoremap <C-m>? m`:%s/\v\C/g<Bar>M<Left><Left><Left><Left>
+nnoremap <C-m>* m`:%s/\V<C-r>=escape(expand('<cword>'), '/\')<Enter>//g<Bar>M<Left><Left><Left><Left>
+nnoremap g<C-m>* m`:%s/\V\C\<<C-r>=escape(expand('<cword>'), '/\')<Enter>\>//g<Bar>M<Left><Left><Left><Left>
+nnoremap <C-m># m`v"zy:%s/\V<C-r>=escape(@z, '/\')<Enter>//g<Bar>M<Left><Left><Left><Left>
+nnoremap g<C-m># m`v"zy:%s/\V\C\<<C-r>=escape(@z, '/\')<Enter>\>//g<Bar>M<Left><Left><Left><Left>
+
+vnoremap <C-m>/ m`:s/\%V\V/g<Bar>M<Left><Left><Left><Left>
+vnoremap g<C-m>/ m`:s/\%V\V\C/g<Bar>M<Left><Left><Left><Left>
+vnoremap <C-m>? m`:s/\%V\v\C/g<Bar>M<Left><Left><Left><Left>
+vnoremap <C-m>* m`:s/\%V\V<C-r>=escape(expand('<cword>'), '/\')<Enter>//g<Bar>M<Left><Left><Left><Left>
+vnoremap g<C-m>* m`:s/\%V\V\C\<<C-r>=escape(expand('<cword>'), '/\')<Enter>\>//g<Bar>M<Left><Left><Left><Left>
+vnoremap <C-m># m`"zy:%s/\V<C-r>=escape(@z, '/\')<Enter>//g<Bar>M<Left><Left><Left><Left>
+vnoremap g<C-m># m`"zy:%s/\V\C\<<C-r>=escape(@z, '/\')<Enter>\>//g<Bar>M<Left><Left><Left><Left>
+
+" For a single substitution, do the same as above but with a prefix of m.
+noremap gm <nop>
+command E let @/=@/[11:]<Bar>call feedkeys('``n``')
+
+nnoremap m/ m`:s/\v(%#.*)@<=\V/e<Bar>E<Left><Left><Left><Left>
+nnoremap gm/ m`:s/\v(%#.*)@<=\V\C/e<Bar>E<Left><Left><Left><Left>
+nnoremap m? m`:s/\v(%#.*)@<=\v\C/e<Bar>E<Left><Left><Left><Left>
+nnoremap m* m`:s/\v(%#.*)@<=\V<C-r>=escape(expand('<cword>'), '/\')<Enter>//e<Bar>E<Left><Left><Left><Left>
+nnoremap gm* m`:s/\v(%#.*)@<=\V\C\<<C-r>=escape(expand('<cword>'), '/\')<Enter>\>//e<Bar>E<Left><Left><Left><Left>
+nnoremap m# m`v"zy:s/\v(%#.*)@<=\V<C-r>=escape(@z, '/\')<Enter>//e<Bar>E<Left><Left><Left><Left>
+nnoremap gm# m`v"zy:s/\v(%#.*)@<=\V\C\<<C-r>=escape(@z, '/\')<Enter>\>//e<Bar>E<Left><Left><Left><Left>
+
+vnoremap m/ m`:s/\v(%#.*)@<=\V/e<Bar>E<Left><Left><Left><Left>
+vnoremap gm/ m`:s/\v(%#.*)@<=\V\C/e<Bar>E<Left><Left><Left><Left>
+vnoremap m? m`:s/\v(%#.*)@<=\v\C/e<Bar>E<Left><Left><Left><Left>
+vnoremap m* m`:s/\v(%#.*)@<=\V<C-r>=escape(expand('<cword>'), '/\')<Enter>//e<Bar>E<Left><Left><Left><Left>
+vnoremap gm* m`:s/\v(%#.*)@<=\V\C\<<C-r>=escape(expand('<cword>'), '/\')<Enter>\>//e<Bar>E<Left><Left><Left><Left>
+vnoremap m# m`"zy:s/\v(%#.*)@<=\V<C-r>=escape(@z, '/\')<Enter>//e<Bar>E<Left><Left><Left><Left>
+vnoremap gm# m`"zy:s/\v(%#.*)@<=\V\C\<<C-r>=escape(@z, '/\')<Enter>\>//e<Bar>E<Left><Left><Left><Left>
+
+" Finally, define Ctrl-n, which can be used to repeat a subsitution, either
+" single or global.
+nnoremap <C-n> m`:&&<Bar>M<Enter>
+vnoremap <C-n> m`:&&<Bar>M<Enter>
+
+" Quicker shortcuts for opening a terminal horizontally and vertically.
+noremap <C-w>t :vertical rightbelow term<CR>
+noremap <C-w>T :horizontal rightbelow term<CR>
+
+" We don't want pesky double spaces after periods when word wrapping with gw.
+set nojoinspaces
 
 " Set the appropriate custom syntax highlighting for each file type.
 au BufRead,BufNewFile *.z80 set filetype=z80
@@ -59,9 +129,9 @@ au BufRead,BufNewFile *.z80 set filetype=z80
 " Make the highlight color for matching parentheses dark magenta.
 hi MatchParen ctermbg=darkmagenta guibg=darkmagenta
 
-" We rarely, if ever, want x to copy to the clipboard. Leave that to d instead.
-nnoremap x "_x
-vnoremap x "_x
+" Make it easier to switch between different indentation sizes.
+command -nargs=1 Spaces set expandtab tabstop=<args> shiftwidth=<args>
+command -nargs=1 Tabs set noexpandtab tabstop=<args> shiftwidth=<args>
 
 " In normal mode, we want to highlight trailing whitespace in red. Don't do it
 " in insert mode because that can get distracting.
