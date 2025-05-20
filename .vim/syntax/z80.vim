@@ -24,15 +24,15 @@ syn keyword z80Instr sbc scf set sla sll sra srl sub
 syn keyword z80Instr pop push
 syn keyword z80Instr xor
 
-syn match z80Directive /\v(^|\W)\zs\.[a-z0-9_]+\ze/
-syn match z80Label /\v^[a-z_][a-z0-9_]*/
-syn match z80Label /\v^\s*\zs[a-z_][a-z0-9_]*\ze:/
-syn match z80Macro /\v\zs[a-z][a-z0-9_]*\ze\(/
+syn match z80Directive /\v(^|\W)\zs\.[a-z_]\w*\ze/
+syn match z80Label /\v^[a-z_]\w*/
+syn match z80Label /\v^\s*\zs[a-z_]\w*\ze\:/
+syn match z80Macro /\v\zs[a-z_]\w*\ze\(/
 
 syn match z80DecNumber /\v(^|\W)\zs[0-9]+\ze(\W|$)/
 syn match z80BinNumber /\v\zs\%[01]+\ze(\W|$)/
 syn match z80OctNumber /\v\zs\@[0-7]+\ze(\W|$)/
-syn match z80HexNumber /\v\zs\$[0-9a-fA-F]+\ze(\W|$)/
+syn match z80HexNumber /\v\zs\$[0-9a-f]+\ze(\W|$)/
 
 syn match z80String /\v\".{-}\"/
 syn match z80Char /\v\'.{-}\'/
