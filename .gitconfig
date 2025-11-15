@@ -1,17 +1,23 @@
 [alias]
-	cd = checkout
-	ls = status
-	sub = reset HEAD --
+	ch = checkout
+	br = branch
+	di = diff
+	si = diff --staged
+	sh = show
+	save = stash push
+	load = stash pop
+	drop = stash drop
+	peek = stash show -p
+	list = stash list
+	sub = reset @ --
+	wipe = reset --hard @
+	wipeall = !git reset --hard @ && git clean -fd
 	amend = commit --amend
-	wipeout = !git reset --hard @ && git clean -fd
-	stiff = diff --staged
 [pager]
 	branch = false
 [credential "https://github.com"]
-	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [init]
 	defaultBranch = master

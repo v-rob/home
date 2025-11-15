@@ -3,14 +3,20 @@ runtime defaults.vim
 " Make quite sure that Vim never uses compatibility mode.
 set nocompatible
 
+" You'd think that everyone would enable these by default, but nooooo...
+syntax on
+set mouse=a
+
 " Show line numbers and set column length limit lines.
 set number
 set colorcolumn=80,90,100
 hi ColorColumn ctermbg=darkgray guibg=lightgrey
 
-" We want four-space tabs for everything by default.
+" We want four-space tabs for everything by default. Also, there are almost no
+" situations where we don't want auto-indentation, so enable it by default.
 set tabstop=4
 set shiftwidth=4
+set autoindent
 
 " Always keep the cursor five lines away from the top or bottom of the screen.
 set scrolloff=5
@@ -22,6 +28,9 @@ set ignorecase
 set shortmess-=S
 " Show the current command and selection information.
 set showcmd
+
+" Tab completion for opening files should emulate the way shells do it.
+set wildmode=list:longest
 
 " Make Vim use the system clipboard for copy and paste.
 set clipboard=unnamedplus
@@ -119,7 +128,10 @@ vnoremap gm# m`"zy:s/\v(%#.*)@<=\V\C<C-r>=escape(@z, '/\')<Enter>//e<Bar>E<Left>
 
 " Finally, define Ctrl-n, which can be used to repeat a subsitution.
 nnoremap <C-n> m`:&&<Bar>M<Enter>
+nnoremap g<C-n> m`:%&&<Bar>M<Enter>
+
 vnoremap <C-n> m`:&&<Bar>M<Enter>
+vnoremap g<C-n> m`:%&&<Bar>M<Enter>
 
 " Quicker shortcuts for opening a terminal horizontally and vertically.
 noremap <C-w>t :vertical rightbelow term<CR>

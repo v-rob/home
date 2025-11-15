@@ -1,7 +1,8 @@
 # Useful aliases for faster typing.
-alias cls=clear
 alias la="ls -a"
 alias ll="ls -al"
+
+alias gl="git status"
 
 # Make man pages word wrap at 100 characters.
 MANWIDTH=100
@@ -10,3 +11,65 @@ export MANWIDTH
 # Set Vim as the program of choice for anything requiring an editor.
 export VISUAL=vim
 export EDITOR="$VISUAL"
+
+function got {
+	echo "$(cat <<"EOF"
+                                                                                
+  _______   ______   .___________.   .___  ___.  __   __       __  ___  ______  
+ /  _____| /  __  \  |           |   |   \/   | |  | |  |     |  |/  / |      \ 
+|  |  __  |  |  |  | `---|  |----'   |  \  /  | |  | |  |     |  '  /  `----)  |
+|  | |_ | |  |  |  |     |  |        |  |\/|  | |  | |  |     |    <       /  / 
+|  |__| | |  `--'  |     |  |        |  |  |  | |  | |  `----.|  .  \     |__|  
+ \______|  \______/      |__|        |__|  |__| |__| |_______||__|\__\     __   
+                                                                          (__)  
+                                                                                
+                            '   .,     .;l.                                     
+                          .xX. 'Ko  .ol:;                                       
+                      o  .0KX.'KKo '';c;                                        
+      .,lx.;OOkd.:l, ,K .0KKKx0KKd dOo. 'odOOOo.                                
+             .'.;kk..KK'OKKKKKKKKK'...dk;coKKKK'                                
+                  ..0KKKKKKKKKKKKKKxkk,;0KKxo                                   
+               'cdKKKKKKKKKKKKKKKKKKK:;llcc;'               ___....___          
+         .':lxxxxkKl.,:ok0KKKKKKKKKO::x00xocll.          .--   .,,    \         
+       l0KKkllldOk;'okko;,,;:oxx kx'Okccl._.kXc       .-     cK0Oo.    |        
+      oKKKKkc;    ;WMMMMMWNKko:. kl;;cXWO| |:c      .-       .         |        
+     .KKKO;      ,WMMMMWNNWMMMMx kl.0xcodOOo;      /                   /        
+      ;c.        OMMMWNNWNWMMMMO kO:;':'          /                   /         
+                 ,WWNNWNNNNMMMW,.0KKKKO.         |                   /          
+                  cWMWNWNNMMMWd oKKKKKKKo,..'::ok0k.                /           
+                    :x0XWK0o,.'xKKKKKKKKKKKKKKKKKKKKo;.           /             
+                              dKKKKKKKKKKKKKKKKKKKKKKKK0kxcc,....|              
+                               xKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKX.|              
+                                xKKKKKKKKKKKKKKKKKKKKKKKKKKKOoc;.,ccc,.         
+                                 dKKKKKKKKKKKKKOdl:::::::odxdk0KKKKKKKK0d.      
+                                  dKKKKKKKKKo;.              .,o0KKKKKKKKK'     
+                                   dKKKKKKK.                     c0KKKKKKKk     
+                                 ....';okKK lOko.                 .0KKKKKKd     
+                                .oxOkdc,... cOOOk. .....           .0KKKKk      
+                            .....  .':okOkd:'cxOOx  '''''''.        :KKKd       
+                      ...'''''''''''..  .':xOOOOOO' ''''''''.        Ok,        
+                     .''''''''''''''''''..  ,xOOOk  ''''. ''.                   
+                     .''''''''''''''''''''''. ,xO; .''''. '''                   
+                     ''''''''''''''''''''''''.. . .'''''. '''.                  
+                    .'''''''' .''''''''''''''''. .''''''. ''''                  
+                    .'''''''  .''''''''''''''''. .''''''  ''''.                 
+                    .''''''     '''''''''''''''  '''''''  '''''                 
+                    ''''''       .''''''''''''. .''''''' .'..                   
+                    '''''          .'''''''''.  '''''''.                        
+                   .'''''           '''''''''  ..'''''' .o.;                    
+                   .'''''''....      '''''''. . : .'''. x0Od                    
+                   ............ .x0d..''''''. '...''''                          
+                                .0KK: .''''. .'''''''.                          
+                             ::.;kKKd                                           
+                              :ddo;    ..............                           
+                                       .............                            
+                                       ......   ....                            
+                                      .....      ...                            
+                                      ...        ...__                          
+                                     /   \        \    \.                       
+                                    /     |        \     \.                     
+                                   |______|         \_____|                     
+                                                                                
+EOF
+	)"
+}
