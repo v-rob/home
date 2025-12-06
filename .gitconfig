@@ -1,6 +1,5 @@
 [alias]
 	ch = checkout
-	br = branch
 	di = diff
 	si = diff --staged
 	sh = show
