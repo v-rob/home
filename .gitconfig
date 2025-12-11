@@ -1,5 +1,6 @@
 [alias]
 	ch = checkout
+	br = branch
 	di = diff
 	si = diff --staged
 	sh = show
@@ -9,6 +10,7 @@
 	peek = stash show -p
 	list = stash list
 	sub = reset @ --
+	res = restore
 	wipe = reset --hard @
 	wipeall = !git reset --hard @ && git clean -fd
 	amend = commit --amend
