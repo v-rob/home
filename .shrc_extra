@@ -11,5 +11,3 @@ export MANWIDTH
 # Set Vim as the program of choice for anything requiring an editor.
 export VISUAL=vim
 export EDITOR="$VISUAL"
-
-source .shrc_pictures
