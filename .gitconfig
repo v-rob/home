@@ -1,24 +1,49 @@
 [alias]
-	ch = checkout
+	sw = switch
 	br = branch
 	di = diff
 	si = diff --staged
 	sh = show
-	save = stash push
-	load = stash pop
-	drop = stash drop
-	peek = stash show -p
-	list = stash list
-	sub = reset @ --
-	res = restore
-	wipe = reset --hard @
-	wipeall = !git reset --hard @ && git clean -fd
+
+	inc = add -N --ignore-removal
+	sub = restore --staged
+	res = restore --staged --worktree
+	soft = reset --soft
+	hard = reset --hard
+	wipeout = "!git hard \"${1:-@}\" && git clean -fd #"
+
+	st-push = stash push
+	st-pop = stash pop
+	st-list = stash list
+	st-drop = stash drop
+	st-show = stash show -p
+	st-sh = stash show -p
+
+	reb = rebase --autostash
+	rebi = rebase -i --autostash --autosquash
+	reb-cont = rebase --continue
+	reb-skip = rebase --skip
+	reb-abort = rebase --abort
+	reb-quit = rebase --quit
+	reb-todo = rebase --edit-todo
+
+	pick = cherry-pick
+	pick-cont = cherry-pick --continue
+	pick-skip = cherry-pick --skip
+	pick-abort = cherry-pick --abort
+	pick-quit = cherry-pick --quit
+
 	amend = commit --amend
+	fixup = "!COMMIT=$(git rev-parse --verify "$1") && git commit -m \"fixup! $COMMIT\" && git rebi \"$COMMIT~\" #"
+	squash = "!COMMIT=$(git rev-parse --verify "$1") && git commit -m \"squash! $COMMIT\" && git rebi \"$COMMIT~\" #"
+	reword = "!COMMIT=$(git rev-parse --verify "$1") && git commit --only --allow-empty -m \"squash! $COMMIT\" && git rebi \"$COMMIT~\" #"
+
 [pager]
 	branch = false
+[init]
+	defaultBranch = master
+
 [credential "https://github.com"]
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = !/usr/bin/gh auth git-credential
-[init]
-	defaultBranch = master

@@ -4,9 +4,19 @@ alias ll="ls -al"
 
 alias gl="git branch; echo; git status"
 
-# Make man pages word wrap at 100 characters.
-MANWIDTH=100
+alias te="grep -FI"
+alias ter="grep -FIr"
+alias re="grep -EI"
+alias rer="grep -EIr"
+
+# Make man pages word wrap at 90 characters.
+MANWIDTH=90
 export MANWIDTH
+
+# We want make sure less doesn't clear the screen on startup and quits if the
+# file fits in less than a full screen. Moreover, it should properly interpret
+# ANSI color escapes.
+export LESS="FR"
 
 # Set Vim as the program of choice for anything requiring an editor.
 export VISUAL=vim

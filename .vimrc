@@ -28,6 +28,8 @@ set ignorecase
 set shortmess-=S
 " Show the current command and selection information.
 set showcmd
+" Always show the status bar, even when there is only one window.
+set laststatus=2
 
 " Tab completion for opening files should emulate the way shells do it.
 set wildmode=list:longest
@@ -37,6 +39,14 @@ set clipboard=unnamedplus
 
 " Set the default shell for :terminal and :shell to zsh
 set shell=/bin/zsh
+
+" Being able to switch between buffers without losing your undo history or
+" having to save them first is the best thing since sliced bread!
+set hidden
+
+" Have confirmation dialogs when closing Vim with unsaved files or similar
+" errors instead of having to repeat the command with :q!.
+set confirm
 
 " Moving in entire pages isn't very nice. Half-pages are better. So, rebind
 " page up/down for occasional convenience when browsing files.
@@ -55,10 +65,13 @@ vnoremap gj j
 vnoremap k gk
 vnoremap gk k
 
-" We rarely, if ever, want x to copy to the clipboard. Leave that to d and c
-" and suchlike instead.
+" We rarely, if ever, want x or s to copy to the clipboard. Leave that to d and
+" c and suchlike instead.
 nnoremap x "_x
+nnoremap s "_s
+
 vnoremap x "_x
+vnoremap s "_s
 
 " Similarly, we don't want p to copy the text that was pasted over.
 vnoremap p P
@@ -139,7 +152,7 @@ vnoremap gm* m`:<BS><BS><BS><BS><BS>echom ""<Enter>:'<,'>s/\%(\%#.*\)\@<=\V\C\<<
 vnoremap m# m`"zy:echom ""<Enter>:s/\%(\%#.*\)\@<=\V<C-r>=escape(@z, '/\')<Enter>//e<Bar>E<Left><Left><Left><Left>
 vnoremap gm# m`"zy:echom ""<Enter>:s/\%(\%#.*\)\@<=\V\C<C-r>=escape(@z, '/\')<Enter>//e<Bar>E<Left><Left><Left><Left>
 
-" Finally, define Ctrl-n, which can be used to repeat a subsitution. If given
+" Finally, define Ctrl-n, which can be used to repeat a substitution. If given
 " a g prefix, the substitution will be executed across the entire file or
 " line selection. Note that the contents of the search register are used in
 " the global case, not the search from the last substitution, since we don't
@@ -150,9 +163,13 @@ nnoremap g<C-n> m`:echom ""<Enter>:%~&g<Bar>M<Enter>
 vnoremap <C-n> m`:<BS><BS><BS><BS><BS>echom ""<Enter>:'<,'>&&<Bar>M<Enter>
 vnoremap g<C-n> m`:<BS><BS><BS><BS><BS>echom ""<Enter>:'<,'>~&g<Bar>M<Enter>
 
+" Since we have Ctrl-n to repeat substitutions, the & keybinding is redundant
+" and moreover is too easy to accidentally hit next to *.
+noremap & <nop>
+
 " Quicker shortcuts for opening a terminal horizontally and vertically.
-noremap <C-w>t :vertical rightbelow term<CR>
-noremap <C-w>T :horizontal rightbelow term<CR>
+noremap <C-w>t :horizontal rightbelow term<CR>
+noremap <C-w>T :vertical rightbelow term<CR>
 
 " We don't want pesky double spaces after periods when word wrapping with gw.
 set nojoinspaces
