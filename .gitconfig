@@ -10,7 +10,8 @@
 	res = restore --staged --worktree
 	soft = reset --soft
 	hard = reset --hard
-	wipeout = "!git hard \"${1:-@}\" && git clean -fd #"
+	wipe = clean -fdx
+	hardwipe = "!git hard \"${1:-@}\" && git wipe #"
 
 	st-push = stash push
 	st-pop = stash pop

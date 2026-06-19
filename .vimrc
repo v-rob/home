@@ -16,6 +16,7 @@ hi ColorColumn ctermbg=darkgray guibg=lightgrey
 " situations where we don't want auto-indentation, so enable it by default.
 set tabstop=4
 set shiftwidth=4
+set smarttab
 set autoindent
 
 " Always keep the cursor five lines away from the top or bottom of the screen.
@@ -28,6 +29,9 @@ set ignorecase
 set shortmess-=S
 " Show the current command and selection information.
 set showcmd
+" Don't highlight things when searching. It's a nice enough feature, but it's
+" annoying to have to explicitly clear the highlight every time.
+set nohlsearch
 " Always show the status bar, even when there is only one window.
 set laststatus=2
 
@@ -157,11 +161,11 @@ vnoremap gm# m`"zy:echom ""<Enter>:s/\%(\%#.*\)\@<=\V\C<C-r>=escape(@z, '/\')<En
 " line selection. Note that the contents of the search register are used in
 " the global case, not the search from the last substitution, since we don't
 " want to include the backreference from single substitution commands.
-nnoremap <C-n> m`:echom ""<Enter>:&&<Bar>M<Enter>
-nnoremap g<C-n> m`:echom ""<Enter>:%~&g<Bar>M<Enter>
+nnoremap <C-n> m`:echom ""<Enter>:&e<Bar>M<Enter>
+nnoremap g<C-n> m`:echom ""<Enter>:%~g<Bar>M<Enter>
 
-vnoremap <C-n> m`:<BS><BS><BS><BS><BS>echom ""<Enter>:'<,'>&&<Bar>M<Enter>
-vnoremap g<C-n> m`:<BS><BS><BS><BS><BS>echom ""<Enter>:'<,'>~&g<Bar>M<Enter>
+vnoremap <C-n> m`:<BS><BS><BS><BS><BS>echom ""<Enter>:'<,'>&e<Bar>M<Enter>
+vnoremap g<C-n> m`:<BS><BS><BS><BS><BS>echom ""<Enter>:'<,'>~g<Bar>M<Enter>
 
 " Since we have Ctrl-n to repeat substitutions, the & keybinding is redundant
 " and moreover is too easy to accidentally hit next to *.
