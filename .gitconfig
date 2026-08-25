@@ -39,6 +39,8 @@
 	squash = "!COMMIT=$(git rev-parse --verify "$1") && git commit -m \"squash! $COMMIT\" && git rebi \"$COMMIT~\" #"
 	reword = "!COMMIT=$(git rev-parse --verify "$1") && git commit --only --allow-empty -m \"squash! $COMMIT\" && git rebi \"$COMMIT~\" #"
 
+[core]
+	editor = vimx
 [pager]
 	branch = false
 [init]

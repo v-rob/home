@@ -81,6 +81,11 @@ vnoremap s "_s
 vnoremap p P
 vnoremap P p
 
+" In a similar vein to using gw to word-wrap lines, we use gs to sort lines.
+" Normally, gs is used for sleep, which is all but worthless.
+nnoremap gs :sort<Enter>
+vnoremap gs :sort<Enter>
+
 " We want to make searches very not magic by default, and only do a very magic
 " regex search if explicitly requested with ?. Case sensitivity (plus word
 " word boundary matching for *) is enabled with g prefix, except for regex
