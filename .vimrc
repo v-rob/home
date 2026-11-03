@@ -186,8 +186,17 @@ set nojoinspaces
 " Set the appropriate custom syntax highlighting for each file type.
 au BufRead,BufNewFile *.z80 set filetype=z80
 
+" Explicitly choose default tabulation conventions for certain file types.
+au BufRead,BufNewFile *.txt,*.md                            Spaces 4
+au BufRead,BufNewFile CMakeLists.txt,Makefile,makefile,*.mk Tabs 4
+au BufRead,BufNewFile *.h,*.c,*.hpp,*.cpp,*.hxx,*.cxx       Tabs 4
+
 " Make the highlight color for matching parentheses dark magenta.
 hi MatchParen ctermbg=darkmagenta guibg=darkmagenta
+
+" Make highlighting consistent across all systems. This isn't the prettiest
+" highlighting ever, but it gets the job done.
+hi Visual cterm=reverse ctermfg=darkgray ctermbg=white
 
 " Make it easier to switch between different indentation sizes.
 command -nargs=1 Spaces set expandtab tabstop=<args> shiftwidth=<args>
@@ -197,19 +206,15 @@ command -nargs=1 Tabs set noexpandtab tabstop=<args> shiftwidth=<args>
 " in insert mode because that can get distracting.
 hi TrailingSpace ctermbg=red guibg=red
 
-function MatchTrailingSpace()
-	call matchadd("TrailingSpace", '\v\s+$', -1, 50)
-endfunction
-
-call MatchTrailingSpace()
+call matchadd("TrailingSpace", '\v\s+$', -1, 50)
 au InsertEnter * silent! call matchdelete(50)
-au InsertLeave * silent! call MatchTrailingSpace()
+au InsertLeave * silent! call matchadd("TrailingSpace", '\v\s+$', -1, 50)
 
-" In insert mode, highlight leading space in green and all tabs with a
-" strikethrough. This allows us to easily tell when a file is using different
-" conventions than desired.
+" In insert mode, highlight leading spaces in green and all tabs (not just
+" leading tabs) with blue. This allows us to easily tell when a file is using
+" different conventions than desired.
 hi LeadingSpaces ctermbg=darkgreen guibg=darkgreen
-hi TabsAnywhere cterm=strikethrough gui=strikethrough
+hi TabsAnywhere ctermbg=darkblue guibg=darkblue
 
 au InsertEnter * silent! call matchadd("LeadingSpaces", '\v(^\zs +\ze)|(\t\zs +\ze)', -1, 51)
 au InsertLeave * silent! call matchdelete(51)
