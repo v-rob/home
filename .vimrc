@@ -38,9 +38,6 @@ set laststatus=2
 " Tab completion for opening files should emulate the way shells do it.
 set wildmode=list:longest
 
-" Make Vim use the system clipboard for copy and paste.
-set clipboard=unnamedplus
-
 " Set the default shell for :terminal and :shell to zsh
 set shell=/bin/zsh
 
