@@ -18,6 +18,8 @@ set tabstop=4
 set shiftwidth=4
 set smarttab
 set autoindent
+" TODO: Remove later
+set expandtab
 
 " Always keep the cursor five lines away from the top or bottom of the screen.
 set scrolloff=5
@@ -37,6 +39,9 @@ set laststatus=2
 
 " Tab completion for opening files should emulate the way shells do it.
 set wildmode=list:longest
+
+" Make Vim use the system clipboard for copy and paste.
+set clipboard=unnamed
 
 " Set the default shell for :terminal and :shell to zsh
 set shell=/bin/zsh
