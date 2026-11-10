@@ -49,6 +49,14 @@ set hidden
 " errors instead of having to repeat the command with :q!.
 set confirm
 
+" On some systems, Vim waits a while after the escape key is pressed to account
+" for multi-byte keycodes that start with escape. Instead, only wait 10ms for
+" the following byte(s) to come in. We still want to wait a full second to
+" allow for multi-character Vim keybindings though.
+set timeout
+set timeoutlen=1000
+set ttimeoutlen=10
+
 " Moving in entire pages isn't very nice. Half-pages are better. So, rebind
 " page up/down for occasional convenience when browsing files.
 noremap <PageUp> <C-u>
